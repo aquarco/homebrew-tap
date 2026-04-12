@@ -20,8 +20,10 @@ cask "aquarco" do
   binary "aquarco"
 
   test do
-    assert_match "1.0.0rc1", shell_output("#{staged_path}/aquarco --version")
-    output = shell_output("#{staged_path}/aquarco update 2>&1", 1)
-    assert_match "not available", output
+    output = system_command("#{staged_path}/aquarco", args: ["--version"])
+    assert_match "1.0.0rc1", output.stdout
+
+    output = system_command("#{staged_path}/aquarco", args: ["update"])
+    assert_match "not available", output.stderr
   end
 end
