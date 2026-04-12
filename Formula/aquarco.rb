@@ -17,13 +17,11 @@ class Aquarco < Formula
   url "https://github.com/aquarco/aquarco/archive/refs/tags/vrc-1.0.0.tar.gz"
   # SHA256 is stamped automatically by the release CI job (see .github/workflows/release.yml).
   # To compute manually: curl -sL <url> | shasum -a 256
-  sha256 "075f4f03fe68449f4cd684d3ee02d3251a8ca097c16032c4e81898187afdc3e5"
+  sha256 "ba36819f6f1e4cecf7bf40151192ec8069656fd391e50d6786626ff833fde57e"
   license "MIT"
   version "rc-1.0.0"
 
   depends_on "python@3.11"
-  depends_on cask: "vagrant"
-  depends_on cask: "virtualbox"
 
   def install
     # Install the full source tree to share so Vagrant's synced_folder ("..")
@@ -50,6 +48,15 @@ class Aquarco < Formula
       exec "#{libexec}/bin/aquarco" "$@"
     EOS
     chmod 0555, bin/"aquarco"
+  end
+
+  def caveats
+    <<~EOS
+      Aquarco requires VirtualBox and Vagrant to manage VMs.
+      Install them before running `aquarco init`:
+        brew install --cask virtualbox
+        brew install --cask vagrant
+    EOS
   end
 
   test do
