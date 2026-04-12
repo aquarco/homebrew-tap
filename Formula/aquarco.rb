@@ -17,18 +17,13 @@ class Aquarco < Formula
   url "https://github.com/aquarco/aquarco/archive/refs/tags/vrc-1.0.0.tar.gz"
   # SHA256 is stamped automatically by the release CI job (see .github/workflows/release.yml).
   # To compute manually: curl -sL <url> | shasum -a 256
-  sha256 "ba36819f6f1e4cecf7bf40151192ec8069656fd391e50d6786626ff833fde57e"
+  sha256 "dc15ead1620bd69fe956b27a9cba2354b07e75e350e5ab77094205db7bbb4556"
   license "MIT"
   version "rc-1.0.0"
 
   depends_on "python@3.11"
 
   def install
-    # Install the full source tree to share so Vagrant's synced_folder ("..")
-    # from vagrant/Vagrantfile correctly resolves to this directory, giving the
-    # VM access to docker/versions.env, supervisor/, config/, db/, etc.
-    (share/"aquarco").install Dir["*"]
-
     # Patch build type to production — disables `aquarco update`
     inreplace "cli/src/aquarco_cli/_build.py",
               'BUILD_TYPE: str = "development"',
@@ -36,6 +31,12 @@ class Aquarco < Formula
 
     venv = virtualenv_create(libexec, "python3.11")
     venv.pip_install buildpath/"cli"
+
+    # Install the full source tree to share so Vagrant's synced_folder ("..")
+    # from vagrant/Vagrantfile correctly resolves to this directory, giving the
+    # VM access to docker/versions.env, supervisor/, config/, db/, etc.
+    # Must happen after pip_install — Homebrew's install() moves files out of buildpath.
+    (share/"aquarco").install Dir["*"]
 
     # Wrap the binary to inject required env vars:
     # - AQUARCO_VAGRANT_DIR: tells the CLI where to find the installed Vagrantfile
