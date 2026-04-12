@@ -22,8 +22,6 @@ class Aquarco < Formula
   version "1.0.0rc1"
 
   depends_on "python@3.11"
-  depends_on cask: "virtualbox"
-  depends_on cask: "vagrant"
 
   def install
     # Patch build type to production — disables `aquarco update`
@@ -51,6 +49,15 @@ class Aquarco < Formula
       exec "#{libexec}/bin/aquarco" "$@"
     EOS
     chmod 0555, bin/"aquarco"
+  end
+
+  def caveats
+    <<~EOS
+      Aquarco requires VirtualBox and Vagrant to manage VMs.
+      Install them before running `aquarco init`:
+        brew install --cask virtualbox
+        brew install --cask vagrant
+    EOS
   end
 
   test do
