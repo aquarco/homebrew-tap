@@ -17,9 +17,9 @@ class Aquarco < Formula
   url "https://github.com/aquarco/aquarco/archive/refs/tags/vrc-1.0.0.tar.gz"
   # SHA256 is stamped automatically by the release CI job (see .github/workflows/release.yml).
   # To compute manually: curl -sL <url> | shasum -a 256
-  sha256 "dc15ead1620bd69fe956b27a9cba2354b07e75e350e5ab77094205db7bbb4556"
+  sha256 "073479d513c6055b734fe41f297738b0847c797fa3a45842be997fe54c0ebc2f"
   license "MIT"
-  version "rc-1.0.0"
+  version "1.0.0rc1"
 
   depends_on "python@3.11"
 
@@ -62,7 +62,7 @@ class Aquarco < Formula
 
   test do
     # Verify the CLI starts and reports its version
-    assert_match "rc-1.0.0", shell_output("#{bin}/aquarco --version")
+    assert_match "1.0.0rc1", shell_output("#{bin}/aquarco --version")
 
     # Verify the production guard blocks `aquarco update`
     output = shell_output("#{bin}/aquarco update 2>&1", 1)
