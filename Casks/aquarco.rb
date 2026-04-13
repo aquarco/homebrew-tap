@@ -10,7 +10,7 @@
 
 cask "aquarco" do
   version "1.0.0rc1"
-  sha256 "22c783557c7557f808faeb13deb76be06387bd11c304dae53ac6436a087bbcf7"
+  sha256 "eb48fa94907c52d71f333774c451809dc450ec71367cd21aa7e5ace9126eabcd"
 
   url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc1/aquarco-macos-arm64.tar.gz"
   name "Aquarco"
