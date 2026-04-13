@@ -10,9 +10,9 @@
 
 cask "aquarco" do
   version "1.0.0rc1"
-  sha256 "0e474afde0993c86da48f4ef6b37dbfe1e51b2d3bdcb54b2a6f327068ccc995f"
+  sha256 "3acff407479e0109de82de6c7a02efbc9ac253ebd09f556fbdd31c55b2ccee06"
 
-  url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc1/aquarco-macos-arm64.tar.gz"
+  url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc2/aquarco-macos-arm64.tar.gz"
   name "Aquarco"
   desc "CLI for managing Aquarco autonomous agent VMs"
   homepage "https://github.com/aquarco/aquarco"
