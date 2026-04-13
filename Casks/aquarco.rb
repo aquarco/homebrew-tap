@@ -6,13 +6,13 @@
 # VirtualBox and Vagrant are installed automatically as cask dependencies.
 #
 # On first `aquarco init`, the VM is provisioned with production Docker images
-# tagged 1.0.0rc5 from docker aquarco repository.
+# tagged 1.0.0rc6 from docker aquarco repository.
 
 cask "aquarco" do
-  version "1.0.0rc5"
-  sha256 "5132337ad437737f7c7aac63ad3646a6cbb11e258d3f7789886d3bbddbe889cb"
+  version "1.0.0rc6"
+  sha256 "a9dc1d0320cfc6e81688a607e9f93e31c88cc9a7d9f7a1fc17997c7b09fe9884"
 
-  url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc5/aquarco-macos-arm64.tar.gz"
+  url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc6/aquarco-macos-arm64.tar.gz"
   name "Aquarco"
   desc "CLI for managing Aquarco autonomous agent VMs"
   homepage "https://github.com/aquarco/aquarco"
@@ -51,13 +51,12 @@ cask "aquarco" do
     system_command "#{staged_path}/aquarco/aquarco", args: ["--help"],
                    print_stdout: false, print_stderr: false
 
-    # On upgrade a backup was created by uninstall_preflight — restore it.
-    # On a fresh install there are no backups, so skip silently.
+    # On upgrade a backup was created by uninstall_preflight — inform the user
+    # to restore it. We don't auto-restore here because Vagrant/VirtualBox may
+    # not be on PATH in the postflight environment.
     backup_root = Pathname(Dir.home) / ".aquarco" / "backups"
     if backup_root.directory? && backup_root.children.any?(&:directory?)
-      system_command "#{staged_path}/aquarco/aquarco",
-                     args: ["init", "--from-backup", "latest"],
-                     print_stdout: true, print_stderr: true
+      ohai "A backup was found. Run `aquarco init --from-backup latest` to restore your VM."
     end
   end
 end
