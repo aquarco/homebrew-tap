@@ -6,13 +6,13 @@
 # VirtualBox and Vagrant are installed automatically as cask dependencies.
 #
 # On first `aquarco init`, the VM is provisioned with production Docker images
-# tagged 1.0.0rc11 from docker aquarco repository.
+# tagged 1.0.0rc12 from docker aquarco repository.
 
 cask "aquarco" do
-  version "1.0.0rc11"
-  sha256 "13b908ecb247236ccadfc094432209c18f20ac44cd8f1f68a51f277074e95ce7"
+  version "1.0.0rc12"
+  sha256 "84f0ed296d7bd0c49e06b8a7966b21f224a4823d93f92c019b630ed571dfd377"
 
-  url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc11/aquarco-macos-arm64.tar.gz"
+  url "https://github.com/aquarco/aquarco/releases/download/v1.0.0rc12/aquarco-macos-arm64.tar.gz"
   name "Aquarco"
   desc "CLI for managing Aquarco autonomous agent VMs"
   homepage "https://github.com/aquarco/aquarco"
